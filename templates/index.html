@@ -26,6 +26,10 @@ Fuck tips and tax!
         $('#createButton').click(() => {
             window.location.href = '{{ url_for("create") }}';
         });
+        $('#tokenText').keypress((e) => {
+            if (e.keyCode == 13)
+                $('#joinButton').click();
+        });
     });
 </script>
 {% endblock %}

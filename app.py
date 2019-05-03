@@ -35,7 +35,7 @@ def store():
         id = random.randint(1000, 9999)
         if id not in sessions:
             break
-    sessions[id] = {'total': total, 'tax': tax, 'tips': tips}
+    sessions[id] = {'id': id, 'total': total, 'tax': tax, 'tips': tips}
     clear_loop.call_soon_threadsafe(clear_loop.call_later, 600, clear_session, id)
     return redirect(url_for('show', id=id))
 

@@ -35,7 +35,10 @@ Create a Session
                     </div>
                 </div>
             </div>
-            <input type="submit" class="btn btn-primary" value="Create">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <input type="submit" class="btn btn-primary" value="Create">
+                <button type="button" class="btn btn-danger" id="backButton">Go Back</button>
+            </div>
             <input type="hidden" id="totalAmountHidden" name="total">
             <input type="hidden" id="taxHidden" name="tax">
             <input type="hidden" id="tipsHidden" name="tips">
@@ -65,6 +68,9 @@ Create a Session
         $('#totalAmountText').on('input', updateValues);
         $('#taxText').on('input', updateValues);
         $('#tipsText').on('input', updateValues);
+        $('#backButton').click(() => {
+            window.history.back();
+        });
     });
 </script>
 {% endblock %}

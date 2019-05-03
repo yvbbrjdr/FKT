@@ -1,1 +1,65 @@
-show {{total}} {{tax}} {{tips}}
+{% extends 'base.html' %}
+
+{% block title %}
+Session {{ id }}
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <label>Session Token</label>
+            <label class="form-control">{{ id }}</label>
+        </div>
+        <div class="form-group">
+            <label>Total Amount</label>
+            <label class="form-control">${{ total }}</label>
+        </div>
+        <div class="form-group">
+                <label>Tax</label>
+                <label class="form-control">${{ tax }}</label>
+        </div>
+        <div class="form-group">
+                <label>Tips</label>
+                <label class="form-control">${{ tips }}</label>
+        </div>
+        <div class="form-group">
+            <label for="individualAmountText">Individual Amount</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="individualAmountText">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="individualAmountResult">= $0.00</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Result</label>
+            <label class="form-control" id="resultLabel">$0.00</label>
+        </div>
+        <button type="button" class="btn btn-primary" id="backButton">Go Back</button>
+    </div>
+</div>
+<script>
+    var total = {{ total }};
+    var tax = {{ tax }};
+    var tips = {{ tips }};
+    function evaluate(id) {
+        var value = $('#' + id).val();
+        if (value == '')
+            return '0.00';
+        return eval($('#' + id).val()).toFixed(2);
+    }
+    function updateValues() {
+        var individual = evaluate('individualAmountText');
+        $('#individualAmountResult').html('= $' + individual);
+        $('#resultLabel').html('$' + (individual * (total + tax + tips) / total).toFixed(2));
+    }
+    $(window).ready(() => {
+        updateValues();
+        $('#individualAmountText').on('input', updateValues);
+        $('#backButton').click(() => {
+            window.history.back();
+        });
+    });
+</script>
+{% endblock %}
