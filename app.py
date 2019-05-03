@@ -29,7 +29,7 @@ def store():
         total = float(request.form['total'])
         tax = float(request.form['tax'])
         tips = float(request.form['tips'])
-    except ValueError:
+    except:
         abort(400)
     while True:
         id = random.randint(10000000, 99999999)

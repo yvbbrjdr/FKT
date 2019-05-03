@@ -1,1 +1,70 @@
-create
+{% extends 'base.html' %}
+
+{% block title %}
+Create a Session
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form action="{{ url_for('store') }}" method="POST">
+            <div class="form-group">
+                <label for="totalAmountText">Total Amount</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="totalAmountText">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="totalAmountResult">= $0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="taxText">Tax</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="taxText">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="taxResult">= $0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tipsText">Tips</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="tipsText">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="tipsResult">= $0.00</span>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Create">
+            <input type="hidden" id="totalAmountHidden" name="total">
+            <input type="hidden" id="taxHidden" name="tax">
+            <input type="hidden" id="tipsHidden" name="tips">
+        </form>
+    </div>
+</div>
+<script>
+    function evaluate(id) {
+        var value = $('#' + id).val();
+        if (value == '')
+            return '0.00';
+        return eval($('#' + id).val()).toFixed(2);
+    }
+    function updateValues() {
+        var total = evaluate('totalAmountText');
+        var tax = evaluate('taxText');
+        var tips = evaluate('tipsText');
+        $('#totalAmountResult').html('= $' + total);
+        $('#taxResult').html('= $' + tax);
+        $('#tipsResult').html('= $' + tips);
+        $('#totalAmountHidden').val(total);
+        $('#taxHidden').val(tax);
+        $('#tipsHidden').val(tips);
+    }
+    $(window).ready(() => {
+        updateValues();
+        $('#totalAmountText').on('input', updateValues);
+        $('#taxText').on('input', updateValues);
+        $('#tipsText').on('input', updateValues);
+    });
+</script>
+{% endblock %}
