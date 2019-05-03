@@ -32,7 +32,7 @@ def store():
     except:
         abort(400)
     while True:
-        id = random.randint(10000000, 99999999)
+        id = random.randint(1000, 9999)
         if id not in sessions:
             break
     sessions[id] = {'total': total, 'tax': tax, 'tips': tips}
