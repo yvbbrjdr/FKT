@@ -1,1 +1,31 @@
-index
+{% extends 'base.html' %}
+
+{% block title %}
+Fuck tips and tax!
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-block" id="createButton">Create a Session</button>
+        </div>
+        <div class="input-group">
+            <input type="number" class="form-control" placeholder="Token" id="tokenText">
+            <span class="input-group-append">
+                <button type="button" class="btn btn-info" id="joinButton">Join a Session</button>
+            </span>
+        </div>
+    </div>
+</div>
+<script>
+    $(window).ready(() => {
+        $('#joinButton').click(() => {
+            window.location.href = '{{ url_for("index") }}' + $('#tokenText').val();
+        });
+        $('#createButton').click(() => {
+            window.location.href = '{{ url_for("create") }}';
+        });
+    });
+</script>
+{% endblock %}

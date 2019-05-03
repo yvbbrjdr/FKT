@@ -1,1 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
 404
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            Fuck! We can't get the thing you want!
+        </div>
+        <button type="button" class="btn btn-primary btn-block" id="backButton">Go Back</button>
+    </div>
+</div>
+<script>
+    $(window).ready(() => {
+        $('#backButton').click(() => {
+            window.history.back();
+        });
+    });
+</script>
+{% endblock %}
