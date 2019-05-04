@@ -9,24 +9,24 @@ Session {{ id }}
     <div class="card-body">
         <div class="form-group">
             <label>Session Token</label>
-            <label class="form-control">{{ id }}</label>
+            <input type="text" class="form-control" disabled value="{{ id }}">
         </div>
         <div class="form-group">
             <label>Total Amount</label>
-            <label class="form-control">${{ total }}</label>
+            <input type="text" class="form-control" disabled value="${{ total }}">
         </div>
         <div class="form-group">
                 <label>Tax</label>
-                <label class="form-control">${{ tax }}</label>
+                <input type="text" class="form-control" disabled value="${{ tax }}">
         </div>
         <div class="form-group">
                 <label>Tips</label>
-                <label class="form-control">${{ tips }}</label>
+                <input type="text" class="form-control" disabled value="${{ tips }}">
         </div>
         <div class="form-group">
             <label for="individualAmountText">Individual Amount</label>
             <div class="input-group">
-                <input type="text" class="form-control" id="individualAmountText">
+                <input type="number" class="form-control" id="individualAmountText">
                 <div class="input-group-append">
                     <span class="input-group-text" id="individualAmountResult">= $0.00</span>
                 </div>
@@ -34,7 +34,7 @@ Session {{ id }}
         </div>
         <div class="form-group">
             <label>Result</label>
-            <label class="form-control" id="resultLabel">$0.00</label>
+            <input type="text" class="form-control" disabled value="$0.00" id="resultText">
         </div>
         <button type="button" class="btn btn-primary" id="backButton">Go Back</button>
     </div>
@@ -52,7 +52,7 @@ Session {{ id }}
     function updateValues() {
         var individual = evaluate('individualAmountText');
         $('#individualAmountResult').html('= $' + individual);
-        $('#resultLabel').html('$' + (individual * (total + tax + tips) / total).toFixed(2));
+        $('#resultText').val('$' + (individual * (total + tax + tips) / total).toFixed(2));
     }
     $(window).ready(() => {
         updateValues();
