@@ -11,7 +11,7 @@ Create a Session
             <div class="form-group">
                 <label for="totalAmountText">Total Amount</label>
                 <div class="input-group">
-                    <input type="text" pattern="[0-9\+-\*/]*" class="form-control" id="totalAmountText" required>
+                    <input type="text" pattern="[0-9+*/-]*" class="form-control" id="totalAmountText" required>
                     <div class="input-group-append">
                         <span class="input-group-text" id="totalAmountResult">= $0.00</span>
                     </div>
@@ -20,7 +20,7 @@ Create a Session
             <div class="form-group">
                 <label for="taxText">Tax</label>
                 <div class="input-group">
-                    <input type="text" pattern="[0-9\+-\*/]*" class="form-control" id="taxText" required>
+                    <input type="text" pattern="[0-9+*/-]*" class="form-control" id="taxText" required>
                     <div class="input-group-append">
                         <span class="input-group-text" id="taxResult">= $0.00</span>
                     </div>
@@ -29,7 +29,7 @@ Create a Session
             <div class="form-group">
                 <label for="tipsText">Tips</label>
                 <div class="input-group">
-                    <input type="text" pattern="[0-9\+-\*/]*" class="form-control" id="tipsText" required>
+                    <input type="text" pattern="[0-9+*/-]*" class="form-control" id="tipsText" required>
                     <div class="input-group-append">
                         <span class="input-group-text" id="tipsResult">= $0.00</span>
                     </div>
@@ -64,13 +64,13 @@ Create a Session
         $('#tipsHidden').val(tips);
     }
     $(window).ready(() => {
-        updateValues();
         $('#totalAmountText').on('input', updateValues);
         $('#taxText').on('input', updateValues);
         $('#tipsText').on('input', updateValues);
         $('#backButton').click(() => {
             window.history.back();
         });
+        updateValues();
     });
 </script>
 {% endblock %}

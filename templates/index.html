@@ -12,6 +12,7 @@ Fuck tips and tax!
         </div>
         <div class="input-group">
             <input type="number" class="form-control" placeholder="Token" id="tokenText">
+            <input type="text" class="form-control" placeholder="Individual Amount" id="individualAmountText">
             <span class="input-group-append">
                 <button type="button" class="btn btn-info" id="joinButton">Join a Session</button>
             </span>
@@ -19,17 +20,19 @@ Fuck tips and tax!
     </div>
 </div>
 <script>
+    function join(e) {
+        if (e.keyCode == 13)
+            $('#joinButton').click();
+    }
     $(window).ready(() => {
         $('#joinButton').click(() => {
-            window.location.href = '{{ url_for("index") }}' + $('#tokenText').val();
+            window.location.href = '{{ url_for("index") }}' + $('#tokenText').val() + '?individual=' + encodeURIComponent($('#individualAmountText').val());
         });
         $('#createButton').click(() => {
             window.location.href = '{{ url_for("create") }}';
         });
-        $('#tokenText').keypress((e) => {
-            if (e.keyCode == 13)
-                $('#joinButton').click();
-        });
+        $('#tokenText').keypress(join);
+        $('#individualAmountText').keypress(join);
     });
 </script>
 {% endblock %}

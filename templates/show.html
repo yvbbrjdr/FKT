@@ -26,7 +26,7 @@ Session {{ id }}
         <div class="form-group">
             <label for="individualAmountText">Individual Amount</label>
             <div class="input-group">
-                <input type="text" pattern="[0-9\+-\*/]*" class="form-control" id="individualAmountText">
+                <input type="text" pattern="[0-9+*/-]*" class="form-control" id="individualAmountText">
                 <div class="input-group-append">
                     <span class="input-group-text" id="individualAmountResult">= $0.00</span>
                 </div>
@@ -55,11 +55,14 @@ Session {{ id }}
         $('#resultText').val('$' + (individual * (total + tax + tips) / total).toFixed(2));
     }
     $(window).ready(() => {
-        updateValues();
         $('#individualAmountText').on('input', updateValues);
         $('#backButton').click(() => {
             window.history.back();
         });
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('individual'))
+            $('#individualAmountText').val(urlParams.get('individual'));
+        updateValues();
     });
 </script>
 {% endblock %}
